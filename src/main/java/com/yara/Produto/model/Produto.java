@@ -31,8 +31,11 @@ public class Produto {
 
     private String obs;
 
-    public Produto(Long id, String codigo, String marca, String tipo, String categoria, BigDecimal precoUnitario, BigDecimal custo, String obs) {
-        this.id = id;
+    protected Produto() {
+    }
+
+    public Produto(String codigo, String marca, String tipo, String categoria,
+                   BigDecimal precoUnitario, BigDecimal custo, String obs) {
         this.codigo = codigo;
         this.marca = marca;
         this.tipo = tipo;
@@ -41,9 +44,7 @@ public class Produto {
         this.custo = custo;
         this.obs = obs;
     }
-    protected Produto() {
 
-    }
     public Long getId() {
         return id;
     }
@@ -107,8 +108,4 @@ public class Produto {
     public void setObs(String obs) {
         this.obs = obs;
     }
-
-
-
-
 }
