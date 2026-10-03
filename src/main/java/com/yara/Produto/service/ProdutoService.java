@@ -64,4 +64,32 @@ public class ProdutoService {
                         "Produto não encontrado com o id: " + id
                 ));
     }
+    @Transactional
+    public ProdutoResponse atualizar(Long id, ProdutoRequest request) {
+
+        Produto produto = buscarPorId(id);
+
+        if (produtoRepository.existsByCodigoAndIdNot(request.codigo(), id)) {
+            throw new CodigoDuplicadoException(
+                    "Código já cadastrado: " + request.codigo()
+            );
+        }
+
+        produto.setCodigo(request.codigo());
+        produto.setMarca(request.marca());
+        produto.setTipo(request.tipo());
+        produto.setCategoria(request.categoria());
+        produto.setPrecoUnitario(request.precoUnitario());
+        produto.setCusto(request.custo());
+        produto.setObs(request.obs());
+
+        return ProdutoResponse.de(produto);
+    }
+    @Transactional
+    public void remover(Long id) {
+
+        Produto produto = buscarPorId(id);
+
+        produtoRepository.delete(produto);
+    }
 }
